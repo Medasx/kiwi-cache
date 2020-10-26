@@ -17,8 +17,8 @@ type locationsResponse struct {
 	Locations []struct {
 		ID    string `json:"id"`
 		IntID int    `json:"int_id"`
-		Name string `json:"name"`
-		Type string `json:"type"`
+		Name  string `json:"name"`
+		Type  string `json:"type"`
 	} `json:"locations"`
 	Meta struct {
 		Locale struct {

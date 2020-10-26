@@ -3,7 +3,7 @@ package cache
 import (
 	"kiwi-entry-task/fetcher"
 	"sync"
-    "time"
+	"time"
 )
 
 type Cacher interface {
@@ -53,17 +53,17 @@ func NewCache(fetcher fetcher.Fetcher, refreshInterval time.Duration, errorHandl
 		items:   &itemsMap{data: make(map[int]string)},
 	}
 	// fetch and store all data
-	if err := c.reloadData(); err != nil  {
+	if err := c.reloadData(); err != nil {
 		errorHandler(err)
 	}
 	go func() {
-	    // reload data after defined time period
-	    for range time.After(refreshInterval) {
-			if err := c.reloadData(); err != nil  {
+		// reload data after defined time period
+		for range time.After(refreshInterval) {
+			if err := c.reloadData(); err != nil {
 				errorHandler(err)
 			}
-        }
-    }()
+		}
+	}()
 	return c
 }
 
@@ -84,11 +84,11 @@ func (c cache) Get(key int) (string, error) {
 
 // reloadData replace stored data with currently fetched data
 func (c cache) reloadData() error {
-    data, err := c.fetcher.FetchAll()
-    if err != nil {
-        return err
-    }
+	data, err := c.fetcher.FetchAll()
+	if err != nil {
+		return err
+	}
 
-    c.items.replaceItems(data)
-    return nil
+	c.items.replaceItems(data)
+	return nil
 }

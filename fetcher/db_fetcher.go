@@ -6,7 +6,7 @@ import (
 )
 
 type currency struct {
-	Id int
+	Id   int
 	Code string
 }
 
@@ -20,7 +20,7 @@ type sqLiteFetcher struct {
 
 func (s sqLiteFetcher) Fetch(id int) (string, error) {
 	item := currency{Id: id}
-	if err :=  s.db.Where(item).First(&item).Error; err != nil {
+	if err := s.db.Where(item).First(&item).Error; err != nil {
 		return "", err
 	}
 	return item.Code, nil
